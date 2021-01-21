@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 const ContactForm = () => {
   const [data, setData] = useState();
   const { register, errors, handleSubmit } = useForm({
-    mode: "onBlur",
+    mode: 'onBlur',
   });
   const onSubmit = (data) => {
     setData(data);
@@ -16,9 +16,10 @@ const ContactForm = () => {
         <div>
           <label htmlFor="firstName">First Name*</label>
           <input
+            id="firstName"
             name="firstName"
             placeholder="Edd"
-            ref={register({ required: true, maxLength: 3 })}
+            ref={register({ required: true, minLength: 3 })}
           />
           {errors.firstName && (
             <p>Looks like there was an error: {errors.firstName.type}</p>
@@ -39,13 +40,12 @@ const ContactForm = () => {
         </div>
 
         <div>
-          <label htmlFor="email">
-            Email*
-          </label>
-          <input name="email" 
-            id="lastName"
+          <label htmlFor="email">Email*</label>
+          <input
+            name="email"
+            id="email"
             placeholder="bluebill1049@hotmail.com"
-            ref={register({ required: true })} 
+            ref={register({ required: true })}
           />
           {errors.email && (
             <p>Looks like there was an error: {errors.email.type}</p>
@@ -55,16 +55,16 @@ const ContactForm = () => {
           <label htmlFor="message">Message</label>
           <textarea
             name="message"
-            id="message" 
-            ref={register({ required: false })} 
+            id="message"
+            ref={register({ required: false })}
           />
         </div>
         {data && (
-          <pre style={{ textAlign: "left", color: "white" }}>
+          <pre style={{ textAlign: 'left', color: 'white' }}>
             {JSON.stringify(data, null, 2)}
           </pre>
         )}
-        <input type="submit" />
+        <input type="submit" id="submit" />
       </form>
     </div>
   );
